@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #changes nginx config to listen to pot 80
-
 cat /etc/nginx/sites-available/default > /etc/nginx/sites-enabled/default
 service nginx restart
-sudo pkill -o nginx
+sudo pkill nginx
