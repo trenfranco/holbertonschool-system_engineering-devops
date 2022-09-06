@@ -7,6 +7,7 @@ if __name__ == "__main__":
 
     import requests
     from sys import argv
+    import json
 
     empId = argv[1]
     response = requests.get("https://jsonplaceholder.typicode.com/users/{}"
@@ -27,4 +28,4 @@ if __name__ == "__main__":
           .format(name, dtasks, ttasks))
     for tasks in res.json():
         if tasks.get("completed"):
-            print("     {}".format(tasks.get('title')))
+            print(" {}".format(tasks.get('title')))
