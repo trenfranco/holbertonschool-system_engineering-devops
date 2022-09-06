@@ -27,4 +27,4 @@ if __name__ == "__main__":
           .format(name, dtasks, ttasks))
     for tasks in res.json():
         if tasks.get("completed"):
-            print("\t {}".format(tasks.get('title')))
+            print("     {}".format(tasks.get('title')))
