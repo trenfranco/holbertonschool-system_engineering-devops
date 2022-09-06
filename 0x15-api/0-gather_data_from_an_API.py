@@ -5,8 +5,8 @@ returns information about his/her TODO list progress."""
 
 if __name__ == "__main__":
 
-    from sys import argv
     import json
+    from sys import argv
     import requests
 
     empId = argv[1]
@@ -27,5 +27,5 @@ if __name__ == "__main__":
     print("Employee {} is done with tasks ({}/{}):"
           .format(name, dtasks, ttasks))
     for tasks in res.json():
-        if tasks.get("completed"):
+        if tasks.get("completed") and tasks.get("title"):
             print("\t {}".format(tasks.get('title')))
