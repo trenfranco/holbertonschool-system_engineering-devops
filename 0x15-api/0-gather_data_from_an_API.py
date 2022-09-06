@@ -3,11 +3,11 @@
 returns information about his/her TODO list progress."""
 
 
-if __name__ == "__main__":
+import json
+import requests
+from sys import argv
 
-    import json
-    from sys import argv
-    import requests
+if __name__ == "__main__":
 
     empId = argv[1]
     response = requests.get("https://jsonplaceholder.typicode.com/users/{}"
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         if tasks.get("completed"):
             dtasks += 1
 
-    print("Employee {} is done with tasks ({}/{}):"
+    print('Employee {} is done with tasks({}/{}):'
           .format(name, dtasks, ttasks))
     for tasks in res.json():
         if tasks.get("completed") and tasks.get("title"):
