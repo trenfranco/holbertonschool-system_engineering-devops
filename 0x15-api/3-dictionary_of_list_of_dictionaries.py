@@ -33,7 +33,6 @@ if __name__ == "__main__":
             list_dicts.append(dic)
         big_dict[user['id']] = list_dicts
 
-
     with open(filename, 'w') as f:
         f.write(json.dumps(big_dict))
-        f.close()
+    f.close()
