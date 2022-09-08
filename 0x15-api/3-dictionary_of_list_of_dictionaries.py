@@ -1,38 +1,29 @@
 #!/usr/bin/python3
-"""using this REST API, for a given employee ID,
-returns information about his/her TODO list progress."""
+"""API"""
 
 
-import csv
 import json
 import requests
-from sys import argv
 
 if __name__ == "__main__":
+    i = 1
+    final = {}
+    while (i <= 10):
+        user_url = "https://jsonplaceholder.typicode.com/users/{}".format(i)
+        api_url = "https://jsonplaceholder.typicode.com/todos/"
+        api_url = api_url + "?userId={}".format(i)
+        res = requests.get(api_url).json()
+        name = requests.get(user_url).json().get("username")
+        lista = []
+        for t in res:
+            dic = {}
+            dic["task"] = t.get("title")
+            dic["completed"] = t.get("completed")
+            dic["username"] = name
+            lista.append(dic)
+        final["{}".format(i)] = lista
+        i += 1
 
-    filename = "todo_all_employees.json"
-
-    # response is dict type
-    response = requests.get("https://jsonplaceholder.typicode.com/users")
-
-    # res is list type when passed parameters
-    res = requests.get("https://jsonplaceholder.typicode.com/todos")
-    res = res.json()
-    response = response.json()
-
-    big_dict = {}
-    dic = {}
-    list_dicts = []
-
-    for user in response:
-        list_dicts = []
-        for i in res:
-            dic['username'] = user['username']
-            dic['task'] = i['title']
-            dic['completed'] = i['completed']
-            list_dicts.append(dic)
-        big_dict[user['id']] = list_dicts
-
-    with open(filename, 'w') as f:
-        f.write(json.dumps(big_dict))
+    with open("todo_all_employees.json", 'w') as f:
+        f.write(json.dumps(final))
     f.close()
